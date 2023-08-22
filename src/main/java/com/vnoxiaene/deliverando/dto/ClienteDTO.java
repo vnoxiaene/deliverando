@@ -11,6 +11,5 @@ import java.util.List;
 @Data
 public class ClienteDTO {
     private String nome;
-    private String cpf;
     private List<PedidoDTO> pedidos;
 }

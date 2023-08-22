@@ -1,6 +1,7 @@
 package com.vnoxiaene.deliverando.mapper;
 
 import com.vnoxiaene.deliverando.dto.ClienteDTO;
+import com.vnoxiaene.deliverando.dto.ClienteResponseDTO;
 import com.vnoxiaene.deliverando.dto.PedidoDTO;
 import com.vnoxiaene.deliverando.model.Cliente;
 import com.vnoxiaene.deliverando.model.Pedido;
@@ -15,4 +16,7 @@ public interface ClienteMapper {
 
     @Mapping(source = "pedidos", target = "pedidos")
     Cliente dtoToEntity(ClienteDTO clienteDTO);
+
+    @Mapping(source = "pedidos", target = "pedidos")
+    ClienteResponseDTO entityToClienteResponseDTO(Cliente cliente);
 }

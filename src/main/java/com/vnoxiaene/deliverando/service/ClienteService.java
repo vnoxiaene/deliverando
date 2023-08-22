@@ -7,5 +7,9 @@ public interface ClienteService {
 
     public void create(ClienteDTO clienteDTO);
 
-    ClienteResponseDTO update(ClienteDTO clienteDTO, Long id);
+    void update(ClienteDTO clienteDTO, Long id);
+
+    void delete(Long id);
+
+    ClienteResponseDTO get(Long id);
 }

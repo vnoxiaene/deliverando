@@ -7,10 +7,7 @@ import com.vnoxiaene.deliverando.service.ClienteService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Slf4j
@@ -25,8 +22,22 @@ public class ClienteController {
         return ResponseEntity.ok().body("Created");
     }
 
-    public ResponseEntity<ClienteResponseDTO> update(ClienteDTO clienteDTO, Long id){
-        return ResponseEntity.ok(clienteService.update(clienteDTO, id));
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<String> update(@RequestBody ClienteDTO clienteDTO, @PathVariable Long id){
+        clienteService.update(clienteDTO, id);
+        return ResponseEntity.ok().body("Updated");
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id){
+        clienteService.delete( id);
+        return ResponseEntity.ok().body("Deleted");
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<ClienteResponseDTO> update(@PathVariable Long id){
+
+        return ResponseEntity.ok().body(clienteService.get(id));
     }
 
 }
