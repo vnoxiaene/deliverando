@@ -4,6 +4,7 @@ package com.vnoxiaene.deliverando.controller;
 import com.vnoxiaene.deliverando.dto.ClienteDTO;
 import com.vnoxiaene.deliverando.dto.ClienteResponseDTO;
 import com.vnoxiaene.deliverando.service.ClienteService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class ClienteController {
     private final ClienteService clienteService;
 
     @PostMapping
-    public ResponseEntity<String> create(ClienteDTO clienteDTO){
+    public ResponseEntity<String> create(@RequestBody @Valid ClienteDTO clienteDTO){
         clienteService.create(clienteDTO);
         return ResponseEntity.ok().body("Created");
     }

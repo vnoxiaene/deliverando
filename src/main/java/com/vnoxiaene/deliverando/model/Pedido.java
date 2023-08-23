@@ -15,5 +15,7 @@ public class Pedido {
     private Long id;
     private String descricao;
     private BigDecimal valor;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Cliente cliente;
 
 }

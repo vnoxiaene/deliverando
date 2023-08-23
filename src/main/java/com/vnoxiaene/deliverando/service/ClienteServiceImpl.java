@@ -39,6 +39,7 @@ public class ClienteServiceImpl implements ClienteService {
                 pedidos.add(pedido);
             });
             cliente.setPedidos(pedidos);
+            clienteRepository.save(cliente);
         });
     }
 
