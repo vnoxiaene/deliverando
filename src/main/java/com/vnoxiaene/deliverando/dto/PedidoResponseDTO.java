@@ -5,9 +5,9 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class PedidoDTO {
+public class PedidoResponseDTO {
 
-    private Long idCliente;
+    private Long id;
     private String descricao;
     private BigDecimal valor;
 }
