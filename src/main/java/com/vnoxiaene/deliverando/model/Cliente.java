@@ -16,7 +16,7 @@ public class Cliente {
     private Long id;
     private String nome;
     private String telefone;
-    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Pedido> pedidos;
 
 }

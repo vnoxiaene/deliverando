@@ -3,6 +3,7 @@ package com.vnoxiaene.deliverando.controller;
 
 import com.vnoxiaene.deliverando.dto.ClienteDTO;
 import com.vnoxiaene.deliverando.dto.ClienteResponseDTO;
+import com.vnoxiaene.deliverando.dto.PedidoDTO;
 import com.vnoxiaene.deliverando.service.ClienteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -40,5 +41,10 @@ public class ClienteController {
 
         return ResponseEntity.ok().body(clienteService.get(id));
     }
+
+    @PostMapping(value = "/{id}/pedido")
+        public ResponseEntity<ClienteResponseDTO> addPedido(@PathVariable Long id,@RequestBody PedidoDTO pedidoDTO){
+        return ResponseEntity.ok().body(clienteService.addPedido(id, pedidoDTO));
+        }
 
 }

@@ -65,4 +65,19 @@ public class ClienteServiceImpl implements ClienteService {
             throw new BadRequestException();
         }
     }
+
+    @Override
+    public ClienteResponseDTO addPedido(Long id,PedidoDTO pedidoDTO) {
+        Optional<Cliente> optionalCliente = clienteRepository.findById(id);
+        if(optionalCliente.isPresent()){
+            Cliente cliente = optionalCliente.get();
+            Pedido pedido = PedidoMapper.INSTANCE.dtoToEntity(pedidoDTO);
+            pedido.setCliente(cliente);
+            cliente.getPedidos().add(pedido);
+            Cliente savedCliente = clienteRepository.save(cliente);
+            return ClienteMapper.INSTANCE.entityToClienteResponseDTO(savedCliente);
+        }else{
+            throw new BadRequestException("There's no client for this pedido.");
+        }
+    }
 }
