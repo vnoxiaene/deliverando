@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,17 +31,16 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public void update(ClienteDTO clienteDTO, Long id) {
         Optional<Cliente> optionalCliente = clienteRepository.findById(id);
-        optionalCliente.ifPresent(cliente -> {
+        if(optionalCliente.isPresent()){
+            Cliente cliente = optionalCliente.get();
             cliente.setNome(clienteDTO.getNome());
-            List<Pedido> pedidos = new ArrayList<>();
+            cliente.setTelefone(clienteDTO.getTelefone());
             List<PedidoDTO> dtoPedidos = clienteDTO.getPedidos();
-            dtoPedidos.forEach(pedidoDTO -> {
-                Pedido pedido = getPedido(pedidoDTO);
-                pedidos.add(pedido);
-            });
-            cliente.setPedidos(pedidos);
+            List<Pedido> pedidos = dtoPedidos.stream().map(PedidoMapper.INSTANCE::dtoToEntity).collect(Collectors.toList());
+            cliente.getPedidos().clear();
+            cliente.getPedidos().addAll(pedidos);
             clienteRepository.save(cliente);
-        });
+        }
     }
 
     private static Pedido getPedido(PedidoDTO pedidoDTO) {
